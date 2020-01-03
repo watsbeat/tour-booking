@@ -1,0 +1,17 @@
+{
+  "name": "meetups",
+  "version": "1.0.0",
+  "description": "a service for fetching and handling information about tech meetups",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Caitlin Watson-Beaton",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2"
+  }
+}
