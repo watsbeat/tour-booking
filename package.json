@@ -1,5 +1,5 @@
 {
-  "name": "meetups",
+  "name": "meetups-service",
   "version": "1.0.0",
   "description": "a service for fetching and handling information about tech meetups",
   "main": "server.ts",
