@@ -4,6 +4,8 @@
   "description": "a service for fetching and handling information about tech meetups",
   "main": "server.ts",
   "scripts": {
+    "start-server": "tsc && node build/server.js",
+    "start": "nodemon -e ts -w ./ -x npm run start-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Caitlin Watson-Beaton",
