@@ -1,7 +1,7 @@
 {
-  "name": "meetups-service",
+  "name": "tour-booking",
   "version": "1.0.0",
-  "description": "a service for fetching and handling information about tech meetups",
+  "description": "Tour Booking API",
   "main": "server.ts",
   "scripts": {
     "start-server": "tsc && node build/server.js",
