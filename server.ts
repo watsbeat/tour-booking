@@ -1,4 +1,5 @@
 import express from 'express';
+import { DataStore } from './data';
 const app = express();
 
 app.get('/', (req, res, next) => {
@@ -6,7 +7,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/tours', (req, res, next) => {
-    res.send('Get list of tours');
+    res.json(DataStore.tours);
 })
 
 app.post('/tours', (req, res, next) => {
