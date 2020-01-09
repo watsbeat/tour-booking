@@ -1,5 +1,5 @@
-import jsonTours from "./data/tours.json";
-import jsonReviews from "./data/reviews.json";
+import jsonTours from "./tours.json";
+import jsonReviews from "./reviews.json";
 
 export class DataStore {
     static tours = jsonTours;
