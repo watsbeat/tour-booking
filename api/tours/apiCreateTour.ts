@@ -3,7 +3,7 @@ import { RequestHandler } from 'express';
 import { TourDetail } from '../../model/shared/tourDetail';
 import uuid from 'uuid/v4';
 
-export const apiCreateNewTour: RequestHandler = (req, res, next) => {
+export const apiCreateTour: RequestHandler = (req, res, next) => {
     const newTour = {
         id: uuid(),
         location: req.body.location || '',
