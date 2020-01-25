@@ -4,7 +4,6 @@ const app = express();
 import { apiGetTours } from './api/tours/apiGetTours';
 import { apiGetTourDetail } from './api/tours/apiGetTourDetail';
 
-
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
