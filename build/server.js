@@ -19,6 +19,7 @@ const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const app = express_1.default();
 const jsonParser = bodyParser.json();
+const urlEncodedParser = bodyParser.urlencoded({ extended: true });
 const authenticator = (req, res, next) => {
     const username = 'watsbeat';
     req.user = username;
@@ -36,7 +37,7 @@ app.get('/', (req, res, next) => {
 });
 app.get('/tours', apiGetTours_1.apiGetTours);
 app.get('/tours/:id', apiGetTourDetail_1.apiGetTourDetail);
-app.post('/tours', jsonParser, apiCreateTour_1.apiCreateTour);
+app.post('/tours', urlEncodedParser, apiCreateTour_1.apiCreateTour);
 app.delete('/tours/:id', apiDeleteTour_1.apiDeleteTour);
 app.put('/tours/:id', jsonParser, apiUpdateTour_1.apiUpdateTour);
 app.patch('/tours/:id', jsonParser, apiUpdateTour_1.apiUpdateTour);

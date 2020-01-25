@@ -10,6 +10,7 @@ import { apiUpdateTour } from './api/tours/apiUpdateTour';
 
 const app = express();
 const jsonParser = bodyParser.json();
+const urlEncodedParser = bodyParser.urlencoded({ extended: true });
 
 const authenticator: CustomRequestHandler = (req, res, next) => {
     const username = 'watsbeat';
@@ -35,7 +36,7 @@ app.get('/tours', apiGetTours);
 
 app.get('/tours/:id', apiGetTourDetail);
 
-app.post('/tours', jsonParser, apiCreateTour);
+app.post('/tours', urlEncodedParser, apiCreateTour);
 
 app.delete('/tours/:id', apiDeleteTour);
 
