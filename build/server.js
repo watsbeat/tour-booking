@@ -12,6 +12,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
+const morgan_1 = __importDefault(require("morgan"));
 const apiGetTours_1 = require("./api/tours/apiGetTours");
 const apiGetTourDetail_1 = require("./api/tours/apiGetTourDetail");
 const apiCreateTour_1 = require("./api/tours/apiCreateTour");
@@ -20,14 +21,10 @@ const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const app = express_1.default();
 const jsonParser = bodyParser.json();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
+const logger = morgan_1.default('dev');
 const authenticator = (req, res, next) => {
     const username = 'watsbeat';
     req.user = username;
-    next();
-};
-const logger = (req, res, next) => {
-    console.log('User: ', req.user);
-    console.log(new Date() + ' - ' + req.method + ' request to ' + req.path);
     next();
 };
 app.use(authenticator);

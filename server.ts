@@ -1,5 +1,6 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
+import morgan from 'morgan';
 import { CustomRequestHandler } from './model/express';
 
 import { apiGetTours } from './api/tours/apiGetTours';
@@ -11,6 +12,7 @@ import { apiUpdateTour } from './api/tours/apiUpdateTour';
 const app = express();
 const jsonParser = bodyParser.json();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
+const logger = morgan('dev');
 
 const authenticator: CustomRequestHandler = (req, res, next) => {
     const username = 'watsbeat';
@@ -18,14 +20,7 @@ const authenticator: CustomRequestHandler = (req, res, next) => {
     next();
 };
 
-const logger: CustomRequestHandler = (req, res, next) => {
-    console.log('User: ', req.user);
-    console.log(new Date() + ' - ' + req.method + ' request to ' + req.path);
-    next();
-};
-
 app.use(authenticator);
-
 app.use(logger);
 
 app.get('/', (req, res, next) => {
