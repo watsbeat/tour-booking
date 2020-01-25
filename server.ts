@@ -1,6 +1,7 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import morgan from 'morgan';
+import path from 'path';
 import { CustomRequestHandler } from './model/express';
 
 import { apiGetTours } from './api/tours/apiGetTours';
@@ -22,6 +23,7 @@ const authenticator: CustomRequestHandler = (req, res, next) => {
 
 app.use(authenticator);
 app.use(logger);
+app.use('/static', express.static(path.resolve('./', 'public', 'img')));
 
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');

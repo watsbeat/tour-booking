@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
 const morgan_1 = __importDefault(require("morgan"));
+const path_1 = __importDefault(require("path"));
 const apiGetTours_1 = require("./api/tours/apiGetTours");
 const apiGetTourDetail_1 = require("./api/tours/apiGetTourDetail");
 const apiCreateTour_1 = require("./api/tours/apiCreateTour");
@@ -29,6 +30,7 @@ const authenticator = (req, res, next) => {
 };
 app.use(authenticator);
 app.use(logger);
+app.use('/static', express_1.default.static(path_1.default.resolve('./', 'public', 'img')));
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });

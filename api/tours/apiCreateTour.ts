@@ -12,7 +12,8 @@ export const apiCreateTour: RequestHandler = (req, res, next) => {
         tourDescription: req.body.tourDescription || '',
         price: req.body.price || 0,
         currency: req.body.currency || '',
-        reviews: req.body.reviews || ''
+        reviews: req.body.reviews || '',
+        img: []
     };
     DataStore.tours.push(newTour);
     res.send('New tour added');
