@@ -23,10 +23,11 @@ const logger = (req, res, next) => {
     console.log(new Date() + ' - ' + req.method + ' request to ' + req.path);
     next();
 };
+app.use(logger);
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
-app.get('/tours', logger, apiGetTours_1.apiGetTours);
+app.get('/tours', apiGetTours_1.apiGetTours);
 app.get('/tours/:id', apiGetTourDetail_1.apiGetTourDetail);
 app.post('/tours', jsonParser, apiCreateTour_1.apiCreateTour);
 app.delete('/tours/:id', apiDeleteTour_1.apiDeleteTour);

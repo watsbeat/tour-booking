@@ -15,11 +15,13 @@ const logger: express.RequestHandler = (req, res, next) => {
     next();
 }
 
+app.use(logger);
+
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
 
-app.get('/tours', logger, apiGetTours);
+app.get('/tours', apiGetTours);
 
 app.get('/tours/:id', apiGetTourDetail);
 
