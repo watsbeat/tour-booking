@@ -1,5 +1,6 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
+import { CustomRequestHandler } from './model/express';
 
 import { apiGetTours } from './api/tours/apiGetTours';
 import { apiGetTourDetail } from './api/tours/apiGetTourDetail';
@@ -10,10 +11,19 @@ import { apiUpdateTour } from './api/tours/apiUpdateTour';
 const app = express();
 const jsonParser = bodyParser.json();
 
-const logger: express.RequestHandler = (req, res, next) => {
+const authenticator: CustomRequestHandler = (req, res, next) => {
+    const username = 'watsbeat';
+    req.user = username;
+    next();
+};
+
+const logger: CustomRequestHandler = (req, res, next) => {
+    console.log('User: ', req.user);
     console.log(new Date() + ' - ' + req.method + ' request to ' + req.path);
     next();
-}
+};
+
+app.use(authenticator);
 
 app.use(logger);
 

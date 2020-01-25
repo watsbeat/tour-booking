@@ -19,10 +19,17 @@ const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const app = express_1.default();
 const jsonParser = bodyParser.json();
+const authenticator = (req, res, next) => {
+    const username = 'watsbeat';
+    req.user = username;
+    next();
+};
 const logger = (req, res, next) => {
+    console.log('User: ', req.user);
     console.log(new Date() + ' - ' + req.method + ' request to ' + req.path);
     next();
 };
+app.use(authenticator);
 app.use(logger);
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
