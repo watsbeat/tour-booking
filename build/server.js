@@ -19,10 +19,14 @@ const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const app = express_1.default();
 const jsonParser = bodyParser.json();
+const logger = (req, res, next) => {
+    console.log(new Date() + ' - ' + req.method + ' request to ' + req.path);
+    next();
+};
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
-app.get('/tours', apiGetTours_1.apiGetTours);
+app.get('/tours', logger, apiGetTours_1.apiGetTours);
 app.get('/tours/:id', apiGetTourDetail_1.apiGetTourDetail);
 app.post('/tours', jsonParser, apiCreateTour_1.apiCreateTour);
 app.delete('/tours/:id', apiDeleteTour_1.apiDeleteTour);

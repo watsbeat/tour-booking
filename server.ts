@@ -10,11 +10,16 @@ import { apiUpdateTour } from './api/tours/apiUpdateTour';
 const app = express();
 const jsonParser = bodyParser.json();
 
+const logger: express.RequestHandler = (req, res, next) => {
+    console.log(new Date() + ' - ' + req.method + ' request to ' + req.path);
+    next();
+}
+
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
 
-app.get('/tours', apiGetTours);
+app.get('/tours', logger, apiGetTours);
 
 app.get('/tours/:id', apiGetTourDetail);
 
