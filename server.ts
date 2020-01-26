@@ -12,12 +12,12 @@ import { apiUploadImage } from './api/tours/apiUploadImage';
 import { apiErrorHandler } from './api/general/errorHandling';
 import { CustomRequestHandler } from './model/express';
 import { APIError } from './model/shared/messages';
+import { dateParam } from './api/general/reqParams/dateParam';
 
 const app = express();
 const jsonParser = bodyParser.json();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
 const logger = morgan('dev');
-const dateFormat = '\\d{4}-\\d{1,2}-\\d{1,2}';
 
 const authenticator: CustomRequestHandler = (req, res, next) => {
     const username = 'watsbeat';
@@ -43,7 +43,10 @@ app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
 
-app.get(`/bookings/:fromDate(${dateFormat})/:toDate(${dateFormat})`, (req, res, next) => res.json(req.params));
+app.param('fromDate', dateParam);
+app.param('toDate', dateParam);
+
+app.get('/bookings/:fromDate/:toDate', (req, res, next) => res.json(req.params));
 
 app.get('/tours', apiGetTours);
 

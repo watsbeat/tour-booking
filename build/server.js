@@ -22,11 +22,11 @@ const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const apiUploadImage_1 = require("./api/tours/apiUploadImage");
 const errorHandling_1 = require("./api/general/errorHandling");
 const messages_1 = require("./model/shared/messages");
+const dateParam_1 = require("./api/general/reqParams/dateParam");
 const app = express_1.default();
 const jsonParser = bodyParser.json();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
 const logger = morgan_1.default('dev');
-const dateFormat = '\\d{4}-\\d{1,2}-\\d{1,2}';
 const authenticator = (req, res, next) => {
     const username = 'watsbeat';
     req.user = username;
@@ -45,7 +45,9 @@ app.use('/static', express_1.default.static(path_1.default.resolve('./', 'public
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
-app.get(`/bookings/:fromDate(${dateFormat})/:toDate(${dateFormat})`, (req, res, next) => res.json(req.params));
+app.param('fromDate', dateParam_1.dateParam);
+app.param('toDate', dateParam_1.dateParam);
+app.get('/bookings/:fromDate/:toDate', (req, res, next) => res.json(req.params));
 app.get('/tours', apiGetTours_1.apiGetTours);
 app.get('/tours/:id', apiGetTourDetail_1.apiGetTourDetail);
 app.post('/tours', urlEncodedParser, apiCreateTour_1.apiCreateTour);
