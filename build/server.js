@@ -20,6 +20,7 @@ const apiCreateTour_1 = require("./api/tours/apiCreateTour");
 const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const apiUploadImage_1 = require("./api/tours/apiUploadImage");
+const errorHandling_1 = require("./api/general/errorHandling");
 const app = express_1.default();
 const jsonParser = bodyParser.json();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
@@ -42,6 +43,7 @@ app.delete('/tours/:id', apiDeleteTour_1.apiDeleteTour);
 app.put('/tours/:id', jsonParser, apiUpdateTour_1.apiUpdateTour);
 app.patch('/tours/:id', jsonParser, apiUpdateTour_1.apiUpdateTour);
 app.post('/tours/:id/img', apiUploadImage_1.apiUploadImage);
+app.use(errorHandling_1.apiErrorHandler);
 app.listen(process.env.PORT || 8091, () => {
     console.log('Server started...');
 });

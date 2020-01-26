@@ -4,8 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const data_1 = require("../../data/data");
+const messages_1 = require("../../model/shared/messages");
 const v4_1 = __importDefault(require("uuid/v4"));
 exports.apiCreateTour = (req, res, next) => {
+    const requiredFields = ['location', 'tourTitle'];
+    const givenFields = Object.getOwnPropertyNames(req.body);
+    if (!requiredFields.every(field => givenFields.includes(field))) {
+        return next(new messages_1.APIError('Data missing', 'Not all required fields supplied', 400));
+    }
     const newTour = {
         id: v4_1.default(),
         location: req.body.location || '',
@@ -18,5 +24,5 @@ exports.apiCreateTour = (req, res, next) => {
         img: []
     };
     data_1.DataStore.tours.push(newTour);
-    res.send('New tour added');
+    res.json(new messages_1.PublicInfo('New tour added', 200, { tour: newTour }));
 };

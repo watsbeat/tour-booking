@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
 import { DataStore } from '../../data/data';
+import { APIError, PublicInfo } from '../../model/shared/messages';
 
 export const apiUpdateTour: RequestHandler = (req, res, next) => {
     const tourID = req.params.id;
@@ -17,8 +18,8 @@ export const apiUpdateTour: RequestHandler = (req, res, next) => {
             img: originalTour.img
         };
         DataStore.tours[tourIndex] = newTour;
-        res.json({ status: 'success', message: 'Element updated' });
+        res.json(new PublicInfo('Updated tour', 200, { tour: newTour }));
     } else {
-        res.json({ status: 'error', message: 'Element not found' });
+        res.json(new APIError('Error', 'Tour not found', 400));
     }
 };
