@@ -21,6 +21,7 @@ const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const apiUploadImage_1 = require("./api/tours/apiUploadImage");
 const errorHandling_1 = require("./api/general/errorHandling");
+const apiCheckTourFilters_1 = require("./api/tours/apiCheckTourFilters");
 const messages_1 = require("./model/shared/messages");
 const dateParam_1 = require("./api/general/reqParams/dateParam");
 const app = express_1.default();
@@ -48,7 +49,7 @@ app.get('/', (req, res, next) => {
 app.param('fromDate', dateParam_1.dateParam);
 app.param('toDate', dateParam_1.dateParam);
 app.get('/bookings/:fromDate/:toDate', (req, res, next) => res.json(req.params));
-app.get('/tours', apiGetTours_1.apiGetTours);
+app.get('/tours', apiCheckTourFilters_1.apiCheckTourFilters, apiGetTours_1.apiGetTours);
 app.get('/tours/:id', apiGetTourDetail_1.apiGetTourDetail);
 app.post('/tours', urlEncodedParser, apiCreateTour_1.apiCreateTour);
 app.delete('/tours/:id', apiDeleteTour_1.apiDeleteTour);

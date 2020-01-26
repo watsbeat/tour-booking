@@ -10,6 +10,7 @@ import { apiDeleteTour } from './api/tours/apiDeleteTour';
 import { apiUpdateTour } from './api/tours/apiUpdateTour';
 import { apiUploadImage } from './api/tours/apiUploadImage';
 import { apiErrorHandler } from './api/general/errorHandling';
+import { apiCheckTourFilters } from './api/tours/apiCheckTourFilters';
 import { CustomRequestHandler } from './model/express';
 import { APIError } from './model/shared/messages';
 import { dateParam } from './api/general/reqParams/dateParam';
@@ -48,7 +49,7 @@ app.param('toDate', dateParam);
 
 app.get('/bookings/:fromDate/:toDate', (req, res, next) => res.json(req.params));
 
-app.get('/tours', apiGetTours);
+app.get('/tours', apiCheckTourFilters, apiGetTours);
 
 app.get('/tours/:id', apiGetTourDetail);
 
