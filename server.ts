@@ -17,6 +17,7 @@ const app = express();
 const jsonParser = bodyParser.json();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
 const logger = morgan('dev');
+const dateFormat = '\\d{4}-\\d{1,2}-\\d{1,2}';
 
 const authenticator: CustomRequestHandler = (req, res, next) => {
     const username = 'watsbeat';
@@ -41,6 +42,8 @@ app.use('/static', express.static(path.resolve('./', 'public', 'img')));
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
+
+app.get(`/bookings/:fromDate(${dateFormat})/:toDate(${dateFormat})`, (req, res, next) => res.json(req.params));
 
 app.get('/tours', apiGetTours);
 
