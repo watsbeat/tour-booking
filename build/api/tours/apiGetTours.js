@@ -14,7 +14,5 @@ exports.apiGetTours = (req, res, next) => {
         ];
         return conditions.every(value => value == true);
     });
-    res.json(new messages_1.PublicInfo('Retrieved tours', 200, {
-        tours: filteredData.map(item => new tourSummary_1.TourSummary(item))
-    }));
+    res.json(messages_1.PublicInfo.infoRetrieved({ tours: filteredData.map(item => new tourSummary_1.TourSummary(item)) }));
 };

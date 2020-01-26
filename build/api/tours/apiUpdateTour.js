@@ -18,9 +18,9 @@ exports.apiUpdateTour = (req, res, next) => {
             img: originalTour.img
         };
         data_1.DataStore.tours[tourIndex] = newTour;
-        res.json(new messages_1.PublicInfo('Updated tour', 200, { tour: newTour }));
+        res.json(messages_1.PublicInfo.infoUpdated({ tour: newTour }));
     }
     else {
-        res.json(new messages_1.APIError('Error', 'Tour not found', 400));
+        res.json(messages_1.APIError.errNotFound({ tourID: tourID }));
     }
 };

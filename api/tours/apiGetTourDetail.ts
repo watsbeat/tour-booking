@@ -11,11 +11,11 @@ export const apiGetTourDetail: RequestHandler = (req, res, next) => {
         const imageUrls = selectedTour.img.map(fileMapper(req.app.get('env')));
         const selectedReviews = DataStore.reviews.filter(item => item.tourID);
         res.json(
-            new PublicInfo('Retrieved tour', 200, {
+            PublicInfo.infoRetrieved({
                 tour: new TourDetail(selectedTour, selectedReviews, imageUrls)
             })
         );
     } else {
-        res.json(new APIError('Validation Error', 'Tour not found', 400));
+        res.json(APIError.errNotFound({ tourID: tourID }));
     }
 };

@@ -7,7 +7,7 @@ exports.apiUploadImage = (req, res, next) => {
     const tourID = req.params.id;
     const tourIndex = data_1.DataStore.tours.findIndex(item => item.id == tourID);
     if (tourIndex == -1) {
-        res.json(new messages_1.APIError('Error', 'Tour not found', 400));
+        res.json(messages_1.APIError.errNotFound({ tourID: tourID }));
     }
     else {
         const upload = static_1.fileUploader(req.app.get('env'));
@@ -17,7 +17,7 @@ exports.apiUploadImage = (req, res, next) => {
             }
             else {
                 data_1.DataStore.tours[tourIndex].img.push(req.file.filename);
-                res.json(new messages_1.PublicInfo('File uploaded', 200, { filename: req.file.filename }));
+                res.json(messages_1.PublicInfo.infoCreated({ filename: req.file.filename }));
             }
         });
     }

@@ -10,11 +10,11 @@ exports.apiGetTourDetail = (req, res, next) => {
     if (selectedTour) {
         const imageUrls = selectedTour.img.map(static_1.fileMapper(req.app.get('env')));
         const selectedReviews = data_1.DataStore.reviews.filter(item => item.tourID);
-        res.json(new messages_1.PublicInfo('Retrieved tour', 200, {
+        res.json(messages_1.PublicInfo.infoRetrieved({
             tour: new tourDetail_1.TourDetail(selectedTour, selectedReviews, imageUrls)
         }));
     }
     else {
-        res.json(new messages_1.APIError('Validation Error', 'Tour not found', 400));
+        res.json(messages_1.APIError.errNotFound({ tourID: tourID }));
     }
 };
