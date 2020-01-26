@@ -11,6 +11,7 @@ import { apiUpdateTour } from './api/tours/apiUpdateTour';
 import { apiUploadImage } from './api/tours/apiUploadImage';
 import { apiErrorHandler } from './api/general/errorHandling';
 import { CustomRequestHandler } from './model/express';
+import { APIError } from './model/shared/messages';
 
 const app = express();
 const jsonParser = bodyParser.json();
@@ -25,6 +26,16 @@ const authenticator: CustomRequestHandler = (req, res, next) => {
 
 app.use(authenticator);
 app.use(logger);
+
+app.use((req, res, next) => {
+    if (!req.accepts('application/json')) {
+        next(new APIError('Content Type not supported', 'This API only accepts application/json', 400));
+    }
+    next();
+});
+
+app.get('/headers', (req, res, next) => res.json(req.headers));
+
 app.use('/static', express.static(path.resolve('./', 'public', 'img')));
 
 app.get('/', (req, res, next) => {

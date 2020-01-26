@@ -21,6 +21,7 @@ const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const apiUploadImage_1 = require("./api/tours/apiUploadImage");
 const errorHandling_1 = require("./api/general/errorHandling");
+const messages_1 = require("./model/shared/messages");
 const app = express_1.default();
 const jsonParser = bodyParser.json();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
@@ -32,6 +33,13 @@ const authenticator = (req, res, next) => {
 };
 app.use(authenticator);
 app.use(logger);
+app.use((req, res, next) => {
+    if (!req.accepts('application/json')) {
+        next(new messages_1.APIError('Content Type not supported', 'This API only accepts application/json', 400));
+    }
+    next();
+});
+app.get('/headers', (req, res, next) => res.json(req.headers));
 app.use('/static', express_1.default.static(path_1.default.resolve('./', 'public', 'img')));
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
