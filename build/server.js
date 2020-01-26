@@ -24,6 +24,7 @@ const errorHandling_1 = require("./api/general/errorHandling");
 const apiCheckTourFilters_1 = require("./api/tours/apiCheckTourFilters");
 const messages_1 = require("./model/shared/messages");
 const dateParam_1 = require("./api/general/reqParams/dateParam");
+const apiDownloadImage_1 = require("./api/tours/apiDownloadImage");
 const app = express_1.default();
 const jsonParser = bodyParser.json();
 const urlEncodedParser = bodyParser.urlencoded({ extended: true });
@@ -33,6 +34,14 @@ const authenticator = (req, res, next) => {
     req.user = username;
     next();
 };
+app.disable('x-powered-by');
+app.use((req, res, next) => {
+    res.set({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE'
+    });
+    next();
+});
 app.use(authenticator);
 app.use(logger);
 app.use((req, res, next) => {
@@ -56,6 +65,7 @@ app.delete('/tours/:id', apiDeleteTour_1.apiDeleteTour);
 app.put('/tours/:id', jsonParser, apiUpdateTour_1.apiUpdateTour);
 app.patch('/tours/:id', jsonParser, apiUpdateTour_1.apiUpdateTour);
 app.post('/tours/:id/img', apiUploadImage_1.apiUploadImage);
+app.get('/static/download/:id', apiDownloadImage_1.apiDownloadImage);
 app.use(errorHandling_1.apiErrorHandler);
 app.listen(process.env.PORT || 8091, () => {
     console.log('Server started...');

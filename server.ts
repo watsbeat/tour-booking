@@ -14,6 +14,7 @@ import { apiCheckTourFilters } from './api/tours/apiCheckTourFilters';
 import { CustomRequestHandler } from './model/express';
 import { APIError } from './model/shared/messages';
 import { dateParam } from './api/general/reqParams/dateParam';
+import { apiDownloadImage } from './api/tours/apiDownloadImage';
 
 const app = express();
 const jsonParser = bodyParser.json();
@@ -26,12 +27,28 @@ const authenticator: CustomRequestHandler = (req, res, next) => {
     next();
 };
 
+app.disable('x-powered-by');
+
+app.use((req, res, next) => {
+    res.set({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE'
+    });
+    next();
+});
+
 app.use(authenticator);
 app.use(logger);
 
 app.use((req, res, next) => {
     if (!req.accepts('application/json')) {
-        next(new APIError('Content Type not supported', 'This API only accepts application/json', 400));
+        next(
+            new APIError(
+                'Content Type not supported',
+                'This API only accepts application/json',
+                400
+            )
+        );
     }
     next();
 });
@@ -62,6 +79,8 @@ app.put('/tours/:id', jsonParser, apiUpdateTour);
 app.patch('/tours/:id', jsonParser, apiUpdateTour);
 
 app.post('/tours/:id/img', apiUploadImage);
+
+app.get('/static/download/:id', apiDownloadImage);
 
 app.use(apiErrorHandler);
 
