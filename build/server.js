@@ -14,6 +14,7 @@ const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const path_1 = __importDefault(require("path"));
+const apiUsers_1 = require("./api/users/apiUsers");
 const apiGetTours_1 = require("./api/tours/apiGetTours");
 const apiGetTourDetail_1 = require("./api/tours/apiGetTourDetail");
 const apiCreateTour_1 = require("./api/tours/apiCreateTour");
@@ -55,6 +56,7 @@ app.use('/static', express_1.default.static(path_1.default.resolve('./', 'public
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
+app.use('/users', apiUsers_1.userRouter);
 app.param('fromDate', dateParam_1.dateParam);
 app.param('toDate', dateParam_1.dateParam);
 app.get('/bookings/:fromDate/:toDate', (req, res, next) => res.json(req.params));

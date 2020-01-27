@@ -3,6 +3,7 @@ import * as bodyParser from 'body-parser';
 import morgan from 'morgan';
 import path from 'path';
 
+import { userRouter } from './api/users/apiUsers';
 import { apiGetTours } from './api/tours/apiGetTours';
 import { apiGetTourDetail } from './api/tours/apiGetTourDetail';
 import { apiCreateTour } from './api/tours/apiCreateTour';
@@ -60,6 +61,8 @@ app.use('/static', express.static(path.resolve('./', 'public', 'img')));
 app.get('/', (req, res, next) => {
     res.send('Tour Booking API');
 });
+
+app.use('/users', userRouter);
 
 app.param('fromDate', dateParam);
 app.param('toDate', dateParam);
