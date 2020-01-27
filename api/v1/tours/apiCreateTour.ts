@@ -1,6 +1,6 @@
-import { DataStore } from '../../data/data';
+import { DataStore } from '../../../data/data';
 import { RequestHandler } from 'express';
-import { APIError, PublicInfo } from '../../model/shared/messages';
+import { APIError, PublicInfo } from '../../../model/shared/messages';
 import uuid from 'uuid/v4';
 
 export const apiCreateTour: RequestHandler = (req, res, next) => {

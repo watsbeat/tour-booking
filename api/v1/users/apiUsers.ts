@@ -4,12 +4,12 @@ import { apiAddUser } from './apiAddUser';
 import { apiDeleteUser } from './apiDeleteUser';
 import { apiUpdateUser } from './apiUpdateUser';
 
-export let userRouter = Router();
+export let usersRouter = Router();
 
-userRouter.get('/:id', apiGetUserDetail);
+usersRouter.get('/:id', apiGetUserDetail);
 
-userRouter.post('/', apiAddUser);
+usersRouter.post('/', apiAddUser);
 
-userRouter.delete('/:id', apiDeleteUser);
+usersRouter.delete('/:id', apiDeleteUser);
 
-userRouter.patch('/:id', apiUpdateUser);
+usersRouter.patch('/:id', apiUpdateUser);

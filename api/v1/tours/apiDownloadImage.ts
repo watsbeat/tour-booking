@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import path from 'path';
-import { APIError } from '../../model/shared/messages';
+import { APIError } from '../../../model/shared/messages';
 
 export const apiDownloadImage: RequestHandler = (req, res, next) => {
     const filedID = req.params.id;
