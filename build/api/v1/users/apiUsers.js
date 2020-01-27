@@ -6,7 +6,8 @@ const apiAddUser_1 = require("./apiAddUser");
 const apiDeleteUser_1 = require("./apiDeleteUser");
 const apiUpdateUser_1 = require("./apiUpdateUser");
 exports.usersRouter = express_1.Router();
-exports.usersRouter.get('/:id', apiGetUserDetail_1.apiGetUserDetail);
 exports.usersRouter.post('/', apiAddUser_1.apiAddUser);
-exports.usersRouter.delete('/:id', apiDeleteUser_1.apiDeleteUser);
-exports.usersRouter.patch('/:id', apiUpdateUser_1.apiUpdateUser);
+exports.usersRouter.route('/:id')
+    .get(apiGetUserDetail_1.apiGetUserDetail)
+    .delete(apiDeleteUser_1.apiDeleteUser)
+    .patch(apiUpdateUser_1.apiUpdateUser);

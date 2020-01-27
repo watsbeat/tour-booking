@@ -10,10 +10,14 @@ import { apiUploadImage } from './apiUploadImage';
 
 export let toursRouter: Router = Router();
 
-toursRouter.get('/', apiCheckTourFilters, apiGetTours);
-toursRouter.post('/', urlEncodedParser, apiCreateTour);
-toursRouter.get('/:id', apiGetTourDetail);
-toursRouter.delete('/:id', apiDeleteTour);
-toursRouter.put('/:id', jsonParser, apiUpdateTour);
-toursRouter.patch('/:id', jsonParser, apiUpdateTour);
+toursRouter.route('/')
+    .get(apiCheckTourFilters, apiGetTours)
+    .post(urlEncodedParser, apiCreateTour);
+
+toursRouter.route('/:id')
+    .get(apiGetTourDetail)
+    .delete(apiDeleteTour)
+    .put(jsonParser, apiUpdateTour)
+    .patch(jsonParser, apiUpdateTour)
+
 toursRouter.post('/:id/img', apiUploadImage);

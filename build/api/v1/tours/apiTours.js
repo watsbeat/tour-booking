@@ -10,10 +10,12 @@ const apiDeleteTour_1 = require("./apiDeleteTour");
 const apiUpdateTour_1 = require("./apiUpdateTour");
 const apiUploadImage_1 = require("./apiUploadImage");
 exports.toursRouter = express_1.Router();
-exports.toursRouter.get('/', apiCheckTourFilters_1.apiCheckTourFilters, apiGetTours_1.apiGetTours);
-exports.toursRouter.post('/', bodyParser_1.urlEncodedParser, apiCreateTour_1.apiCreateTour);
-exports.toursRouter.get('/:id', apiGetTourDetail_1.apiGetTourDetail);
-exports.toursRouter.delete('/:id', apiDeleteTour_1.apiDeleteTour);
-exports.toursRouter.put('/:id', bodyParser_1.jsonParser, apiUpdateTour_1.apiUpdateTour);
-exports.toursRouter.patch('/:id', bodyParser_1.jsonParser, apiUpdateTour_1.apiUpdateTour);
+exports.toursRouter.route('/')
+    .get(apiCheckTourFilters_1.apiCheckTourFilters, apiGetTours_1.apiGetTours)
+    .post(bodyParser_1.urlEncodedParser, apiCreateTour_1.apiCreateTour);
+exports.toursRouter.route('/:id')
+    .get(apiGetTourDetail_1.apiGetTourDetail)
+    .delete(apiDeleteTour_1.apiDeleteTour)
+    .put(bodyParser_1.jsonParser, apiUpdateTour_1.apiUpdateTour)
+    .patch(bodyParser_1.jsonParser, apiUpdateTour_1.apiUpdateTour);
 exports.toursRouter.post('/:id/img', apiUploadImage_1.apiUploadImage);
