@@ -1,8 +1,8 @@
 # Project
 
-A backend API built with node.js, express & typescript.
+A backend API built with Node.js, Express & Typescript.
 
-Deployed on Heroku: https://tour-booking.herokuapp.com/
+Deployed on [Heroku](https://tour-booking.herokuapp.com/)
 
 ## Setup
 
@@ -12,3 +12,7 @@ Deployed on Heroku: https://tour-booking.herokuapp.com/
 4. Install npm packages: `npm i`
 5. Launch the server: `npm start`
 6. Go to `localhost:8091` in your browser
+
+## Helpful Links
+
+[TypeScript-Node-Starter](https://github.com/microsoft/TypeScript-Node-Starter)

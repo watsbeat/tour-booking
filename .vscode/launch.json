@@ -5,13 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
-            "request": "launch",
             "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/server.ts"
-        }
+            "type": "node",
+            "program": "${workspaceFolder}/dist/server.js",
+            "request": "launch",
+            "preLaunchTask": "npm: start-server"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}",
+            "protocol": "inspector"
+        }        
     ]
 }
